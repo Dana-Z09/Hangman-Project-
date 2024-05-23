@@ -1,0 +1,78 @@
+* {
+font-family: "Poetsen One", sans-serif;
+}
+  
+body {
+    font-family: 'Poetsen One', sans-serif;
+    font-size: 14px;
+    color: white;
+    display: flex;
+    min-height: 90vh;
+    margin: 0;
+    padding: 0;
+    background-color: #332550;
+    justify-content: center;
+    align-items: center;
+}
+
+.poetsen-one-regular {
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+
+.cabinadejuego {
+    width: 850px;
+    background-color: #3F6B3F;
+    align-items: center;
+    display: flex;
+    padding: 60px 40px;
+    gap: 70px;
+    border-radius: 15px
+
+}
+
+.ahorcado img {
+    max-width: 300px;
+}
+ .ahorcado h1 {
+    margin-top: 25px;
+    text-align: center;
+ }
+
+ .ahorcado b {
+    text-transform: uppercase;
+ }
+
+.linealetra {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+}
+
+.letra {
+    width: 30px;
+    border-bottom: 4px solid white;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    
+}
+
+.letradescartada {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 6px; 
+}
+
+.letradescartada button {
+    color: white;
+    background-color: #332550;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: calc(100%/9-5px);
+    padding: 10px;
+    border-radius: 20px;
+    
+ }
