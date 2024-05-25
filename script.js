@@ -1,15 +1,47 @@
 var nombreJugadorHTML=document.getElementById("NombreJugador");
 var nombreJugador;
-//funcion principal
-function comenzarJuego(){
-    if(validarNombreJugador()){
-        console.log("selogro");
-        nombreJugador=strTitulo(nombreJugadorHTML.value);
+var listaJugadores; //aqui se guardan todos los jugadores del local storge
+var jugadorPrincipal;
+
+/*Funciones
+
+buscador de jugador (nombreJugador){
+    for(var i=0;i<listaJugadores.length;i++){
+        if(listaJugadores[i].nombre==nombreJugador){
+            return listaJugadores[i];
+        }
     }
-    alertaVerificacion();
+    return null;
 }
 
 
+si el jugador esta entonces se asigna a jugador principal con todos sus datos
+
+si el jugador no esta entonces se crea un nuevo jugador con todos sus datos
+
+
+
+en el otro archivo tengo que guardar el jugador en el local storage y actualizar sus datos
+*/
+
+//funcion principal
+function comenzarJuego(){
+    if(validarNombreJugador()){
+        nombreJugador=strTitulo(nombreJugadorHTML.value);
+
+
+        location.href="index2.html";
+        /*
+        buscar jugador
+        si esta 
+            te lleva a la otra pagina
+        si no esta
+            creas uno
+            te lleva a la otra pagina
+        */
+    }
+    alertaVerificacion();
+}
 
 // La siguiente funcion valida el elemento input
 function validarNombreJugador() {
@@ -65,3 +97,70 @@ function strTitulo(str) {
     const capitalized =  str.charAt(0).toUpperCase()+ str.slice(1);
     return capitalized;
 }
+
+// Prepara la pagina
+document.addEventListener("DOMContentLoaded", function () {
+    tablaLocalStorage();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Funcion que llena la tabla con los datos del local storage
+/*function tablaLocalStorage(){
+    // Obtener referencia a la tabla
+  var tabla = document.querySelector("table tbody");
+  // Paso 1: Obtener todas las claves del localStorage
+  var clave = Object.keys(localStorage);
+
+  // Paso 2: Iterar sobre las claves y obtener los valores correspondientes
+  var listaJugadores = [];
+
+  clave.forEach(function (key) {
+    var valor = localStorage.getItem(key);
+    // Paso 3: Almacenar la clave y el valor en un objeto
+    localStorageData.push({ key: key, value: valor });
+  });
+  // Verificar si hay datos en el almacenamiento local
+  if (localStorageData.length > 0) {
+    // Limpiar el contenido existente de la tabla
+    table.innerHTML = "";
+
+    localStorageData.sort(function (a, b) {
+      var valueA = parseInt(a.value);
+      var valueB = parseInt(b.value);
+      return valueB - valueA;
+    });
+
+    localStorageData.forEach(function (item) {
+      var row = table.insertRow();
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      cell1.textContent = item.key; // Clave
+      cell2.textContent = item.value;
+    });
+  }
+}*/
