@@ -28,9 +28,13 @@ en el otro archivo tengo que guardar el jugador en el local storage y actualizar
 function comenzarJuego(){
     if(validarNombreJugador()){
         nombreJugador=strTitulo(nombreJugadorHTML.value);
+        jugadorPrincipal=new Jugador(nombreJugador);
 
+        console.log(jugadorPrincipal.getNombre());
+        console.log(jugadorPrincipal.getPuntos());
+        console.log(jugadorPrincipal.getVictorias());
+        
 
-        location.href="index2.html";
         /*
         buscar jugador
         si esta 
@@ -40,9 +44,9 @@ function comenzarJuego(){
             te lleva a la otra pagina
         */
     }
-    alertaVerificacion();
-}
 
+    alertaVerificacion()
+}
 // La siguiente funcion valida el elemento input
 function validarNombreJugador() {
     // Variable que usaremos para determinar si el input es valido
@@ -82,14 +86,27 @@ function validarNombreJugador() {
     // devolvemos el valor de isValid
     return isValid;
 }
-//Funcion que muestra un mensaje emergente relacionado con la validación
+//Funcion que muestra un mensaje emergente relacionado con la validación para pasar al juego
     function alertaVerificacion() {
         const valido = validarNombreJugador();
         if (!valido) {
             swal("Ingreso Inválido", "El nombre solo puede contener letras, entre 3 a 14 letras. Signos, números o espacios no están permitidos por el programa.", "error");
         } else {
-          swal('Ingreso válido', `¡Disfruta el juego ${nombreJugador}!`, "success");
-        }
+
+
+          swal({
+
+          title:'Ingreso válido',
+          text: `¡Disfruta el juego ${nombreJugador}!`,
+          icon:'success',
+          button: 'Aceptar',
+          })
+          .then((isOkay) => {
+            if(isOkay){
+              location.href="index2.html";
+            }
+
+          });}
 }
 //Funcion string en formato titulo
 function strTitulo(str) {
@@ -98,11 +115,39 @@ function strTitulo(str) {
     return capitalized;
 }
 
+//Clase Jugador
+function Jugador(nombre) {
+  this.nombre=nombre;
+  this.puntos=0;
+  this.victorias=0;
+
+  this.getVictorias=function(){
+    return this.victorias;
+  };
+  this.setVictorias=function(victorias){
+    this.victorias=victorias;
+  };
+  this.getPuntos=function(){
+    return this.puntos;
+  };
+  this.setPuntos=function(puntos){
+    this.puntos=puntos;
+  };
+  this.getNombre=function(){
+    return this.nombre;
+  };
+}
+
+
+
+
+
+/*
 // Prepara la pagina
 document.addEventListener("DOMContentLoaded", function () {
     tablaLocalStorage();
 });
-
+*/
 
 
 
