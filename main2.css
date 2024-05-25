@@ -1,0 +1,16 @@
+* {
+    font-family: "Poetsen One", sans-serif;
+    }
+      
+    body {
+        font-family: 'Poetsen One', sans-serif;
+        font-size: 14px;
+        color: white;
+        display: flex;
+        min-height: 90vh;
+        margin: 0;
+        padding: 0;
+        background-color: #332550;
+        justify-content: center;
+        align-items: center;
+    }
