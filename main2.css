@@ -14,3 +14,44 @@
         justify-content: center;
         align-items: center;
     }
+
+    .tablapuntaje {
+        justify-content: center;
+        display: flex;
+    }
+
+    .presentacion {
+        justify-content: center;
+    }
+    .presentacion h1{
+        font-size: 50px;
+        text-align: center;
+        margin: -30px;
+
+    }
+
+    .presentacion h2{
+        text-align: center;
+
+    }
+
+    .presentacion input{
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        width: 120px;
+
+    }
+    .presentacion button {
+        display: flex;
+        color: white;
+    background-color: #fb5800;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+
+    
+    }
