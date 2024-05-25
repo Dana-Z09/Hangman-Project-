@@ -1,51 +1,78 @@
 var nombreJugadorHTML=document.getElementById("NombreJugador");
 var nombreJugador;
-var listaJugadores; //aqui se guardan todos los jugadores del local storge
+var listaJugadores=[]; //aqui se guardan todos los jugadores del local storge
 var jugadorPrincipal;
+var listaPalabras=[Abetos, Abriga, Abuela, Acceso, Bromas, Barniz, Basado, Brutal, Cabeza, Casita, Cascos	, Celosa, Dulces, Dotado, Discos, Dureza, Entera, Exacto, Encima, Enfado, Famosa, Fresas, Filtro, Flecha, Helado, Herida, Hierro, Huevos, Infiel, Inflar, Inerte, Imagen, Jardín, Juicio, Jarrón, Juzgar, Labios, Llorar, Lluvia, Locura, Música, Morado, Modelo, Madera, Nervio, Ninfas, Número, Nombre, Omitir, Opinar, Olfato, Objeto, Pensar, Parque, Pierna, Pelota, Riesgo, Romper, Rutina, Ranura, Sabios, Simple, Sirven, Soplar, Tienda, Torres, Tesoro, Trueno, Unidad, Unirse, Umbral, Usando, Verano, Vicios, Viejas,Visual];
+
 
 /*Funciones
-
-buscador de jugador (nombreJugador){
-    for(var i=0;i<listaJugadores.length;i++){
-        if(listaJugadores[i].nombre==nombreJugador){
-            return listaJugadores[i];
-        }
-    }
-    return null;
-}
-
-
-si el jugador esta entonces se asigna a jugador principal con todos sus datos
-
-si el jugador no esta entonces se crea un nuevo jugador con todos sus datos
-
-
-
 en el otro archivo tengo que guardar el jugador en el local storage y actualizar sus datos
 */
 
+
+
+// Prepara la pagina
+document.addEventListener("DOMContentLoaded", function () {
+    tablaLocalStorage();
+});
+
+//Funcion que llena la tabla con los datos del local storage
+function tablaLocalStorage(){
+    // Obtener referencia a la tabla
+  var tabla = document.querySelector("table tbody");
+  // Paso 1: Obtener todas las claves del localStorage
+
+  listaJugadores=JSON.parse(localStorage.getItem("HistorialJugadores"));
+
+  //Paso 2: Obtener la informacion de cada jugador y colocar en la tabla
+
+  listaJugadores.forEach(function (jugador) {
+      var row = tabla.insertRow();
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      cell1.textContent = jugador.nombre; // Nombre
+      cell2.textContent = jugador.victorias;//victorias
+      cell3.textContent = jugador.puntos;// Puntaje
+    });
+  }
 //funcion principal
 function comenzarJuego(){
-    if(validarNombreJugador()){
+
+
+
+  //Validacion de nombre
+  if(validarNombreJugador()){
         nombreJugador=strTitulo(nombreJugadorHTML.value);
-        jugadorPrincipal=new Jugador(nombreJugador);
+        jugadorPrincipal=busquedaPorNombre(listaJugadores,nombreJugador);
+        if (jugadorPrincipal==null){
+          jugadorPrincipal = new Jugador(nombreJugador);
+          listaJugadores.push(jugadorPrincipal);
+          localStorage.setItem("HistorialJugadores", JSON.stringify(listaJugadores));
+        }
 
         console.log(jugadorPrincipal.getNombre());
         console.log(jugadorPrincipal.getPuntos());
         console.log(jugadorPrincipal.getVictorias());
-        
+        console.log(listaJugadores);
+      }
+      alertaVerificacion()
 
-        /*
-        buscar jugador
-        si esta 
-            te lleva a la otra pagina
-        si no esta
-            creas uno
-            te lleva a la otra pagina
-        */
+      var palabraPrincipal=seleccionarPalabra();
+
+      /*Mandar jugador y palabra a la otra pagina*/ 
     }
 
-    alertaVerificacion()
+
+
+//Funcion que busca a un jugador en la lista por su nombre, si esta te retorna el objeto, si no esta retorna null
+function busquedaPorNombre(listaJugadores, nombreJugador){
+  for(var i=0;i<listaJugadores.length;i++){
+    if(listaJugadores[i].nombre==nombreJugador){
+      return listaJugadores[i];
+    }
+  }
+  return null;
 }
 // La siguiente funcion valida el elemento input
 function validarNombreJugador() {
@@ -87,7 +114,7 @@ function validarNombreJugador() {
     return isValid;
 }
 //Funcion que muestra un mensaje emergente relacionado con la validación para pasar al juego
-    function alertaVerificacion() {
+function alertaVerificacion() {
         const valido = validarNombreJugador();
         if (!valido) {
             swal("Ingreso Inválido", "El nombre solo puede contener letras, entre 3 a 14 letras. Signos, números o espacios no están permitidos por el programa.", "error");
@@ -114,7 +141,6 @@ function strTitulo(str) {
     const capitalized =  str.charAt(0).toUpperCase()+ str.slice(1);
     return capitalized;
 }
-
 //Clase Jugador
 function Jugador(nombre) {
   this.nombre=nombre;
@@ -137,75 +163,9 @@ function Jugador(nombre) {
     return this.nombre;
   };
 }
+//Funcion que regresa una palabra aleatoria
+function seleccionarPalabra(){
+  var palabra=listaPalabras[Math.floor(Math.random()*listaPalabras.length)];
+  return palabra;
+}
 
-
-
-
-
-/*
-// Prepara la pagina
-document.addEventListener("DOMContentLoaded", function () {
-    tablaLocalStorage();
-});
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Funcion que llena la tabla con los datos del local storage
-/*function tablaLocalStorage(){
-    // Obtener referencia a la tabla
-  var tabla = document.querySelector("table tbody");
-  // Paso 1: Obtener todas las claves del localStorage
-  var clave = Object.keys(localStorage);
-
-  // Paso 2: Iterar sobre las claves y obtener los valores correspondientes
-  var listaJugadores = [];
-
-  clave.forEach(function (key) {
-    var valor = localStorage.getItem(key);
-    // Paso 3: Almacenar la clave y el valor en un objeto
-    localStorageData.push({ key: key, value: valor });
-  });
-  // Verificar si hay datos en el almacenamiento local
-  if (localStorageData.length > 0) {
-    // Limpiar el contenido existente de la tabla
-    table.innerHTML = "";
-
-    localStorageData.sort(function (a, b) {
-      var valueA = parseInt(a.value);
-      var valueB = parseInt(b.value);
-      return valueB - valueA;
-    });
-
-    localStorageData.forEach(function (item) {
-      var row = table.insertRow();
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      cell1.textContent = item.key; // Clave
-      cell2.textContent = item.value;
-    });
-  }
-}*/
