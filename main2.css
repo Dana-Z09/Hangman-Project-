@@ -72,7 +72,7 @@ body {
     text-transform: uppercase;
     cursor: pointer;
     width: calc(100%/9-5px);
-    padding: 100px;
+    padding: 10px;
     border-radius: 20px;
     display: flex;
  }
