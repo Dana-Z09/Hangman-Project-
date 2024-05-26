@@ -2,7 +2,6 @@ var nombreJugadorHTML=document.getElementById("NombreJugador");
 var nombreJugador;
 var listaJugadores=[]; //aqui se guardan todos los jugadores del local storge
 var jugadorPrincipal;
-var listaPalabras=[Abetos, Abriga, Abuela, Acceso, Bromas, Barniz, Basado, Brutal, Cabeza, Casita, Cascos	, Celosa, Dulces, Dotado, Discos, Dureza, Entera, Exacto, Encima, Enfado, Famosa, Fresas, Filtro, Flecha, Helado, Herida, Hierro, Huevos, Infiel, Inflar, Inerte, Imagen, Jardín, Juicio, Jarrón, Juzgar, Labios, Llorar, Lluvia, Locura, Música, Morado, Modelo, Madera, Nervio, Ninfas, Número, Nombre, Omitir, Opinar, Olfato, Objeto, Pensar, Parque, Pierna, Pelota, Riesgo, Romper, Rutina, Ranura, Sabios, Simple, Sirven, Soplar, Tienda, Torres, Tesoro, Trueno, Unidad, Unirse, Umbral, Usando, Verano, Vicios, Viejas,Visual];
 
 
 /*Funciones
@@ -38,9 +37,6 @@ function tablaLocalStorage(){
   }
 //funcion principal
 function comenzarJuego(){
-
-
-
   //Validacion de nombre
   if(validarNombreJugador()){
         nombreJugador=strTitulo(nombreJugadorHTML.value);
@@ -50,20 +46,18 @@ function comenzarJuego(){
           listaJugadores.push(jugadorPrincipal);
           localStorage.setItem("HistorialJugadores", JSON.stringify(listaJugadores));
         }
-
+/*
         console.log(jugadorPrincipal.getNombre());
         console.log(jugadorPrincipal.getPuntos());
         console.log(jugadorPrincipal.getVictorias());
         console.log(listaJugadores);
-      }
+      }*/
+  }
       alertaVerificacion()
 
-      var palabraPrincipal=seleccionarPalabra();
 
       /*Mandar jugador y palabra a la otra pagina*/ 
-    }
-
-
+}
 
 //Funcion que busca a un jugador en la lista por su nombre, si esta te retorna el objeto, si no esta retorna null
 function busquedaPorNombre(listaJugadores, nombreJugador){
@@ -141,6 +135,7 @@ function strTitulo(str) {
     const capitalized =  str.charAt(0).toUpperCase()+ str.slice(1);
     return capitalized;
 }
+
 //Clase Jugador
 function Jugador(nombre) {
   this.nombre=nombre;
@@ -163,9 +158,3 @@ function Jugador(nombre) {
     return this.nombre;
   };
 }
-//Funcion que regresa una palabra aleatoria
-function seleccionarPalabra(){
-  var palabra=listaPalabras[Math.floor(Math.random()*listaPalabras.length)];
-  return palabra;
-}
-

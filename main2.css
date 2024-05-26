@@ -59,14 +59,14 @@ body {
     
 }
 
-.letradescartada {
+.teclado {
    display: flex;
    flex-wrap: wrap;
    justify-content: center;
    gap: 6px; 
 }
 
-.letradescartada button {
+.teclado button {
     color: white;
     background-color: #332550;
     text-transform: uppercase;
