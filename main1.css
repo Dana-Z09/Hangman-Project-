@@ -26,13 +26,12 @@
     .presentacion h1{
         font-size: 50px;
         text-align: center;
-        margin: -30px;
+
 
     }
 
     .presentacion h3{
         text-align: center;
-        margin-top: 30px;
 
     }
     .presentacion h2{
@@ -76,7 +75,8 @@
         margin-left: auto;
         margin-right: auto;
         border-collapse: collapse;
-        margin-top: 100px;
+        margin-top: 80px;
+        
      }
 
      .tablapuntaje td,th{
