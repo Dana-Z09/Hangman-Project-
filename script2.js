@@ -1,7 +1,5 @@
-var vidas=6;
-var turnos=0;
-var puntos=0;
-var listaPalabras=["Abetos", "Abriga", "Abuela", "Acceso", "Bromas", "Barniz", "Basado", "Brutal", "Cabeza", "Casita", "Cascos", "Celosa", "Dulces", "Dotado", "Discos", "Dureza", "Entera", "Exacto", "Encima", "Enfado", "Famosa", "Fresas", "Filtro", "Flecha", "Helado", "Herida", "Hierro", "Huevos", "Infiel", "Inflar", "Inerte", "Imagen", "Jardín", "Juicio", "Jarrón", "Juzgar", "Labios", "Llorar", "Lluvia", "Locura", "Música", "Morado", "Modelo", "Madera", "Nervio", "Ninfas", "Número", "Nombre", "Omitir", "Opinar", "Olfato", "Objeto", "Pensar", "Parque", "Pierna", "Pelota", "Riesgo", "Romper", "Rutina", "Ranura", "Sabios", "Simple", "Sirven", "Soplar", "Tienda", "Torres", "Tesoro", "Trueno", "Unidad", "Unirse", "Umbral", "Usando", "Verano", "Vicios", "Viejas", "Visual"];
+var vidas, turnos, puntos,nombrePrincipal;
+var listaPalabras=[   "Abandonar", "Abanico", "Abominar", "Abril", "Abrojo", "Academia", "Accidente", "Aceite", "Acelga", "Acera", "Acero", "Aciago", "Acolito", "Acordeon", "Acosar", "Acrostico", "Acuarela", "Adiccion", "Adivinar", "Adonis", "Adrede", "Aduana", "Adulterio", "Aforismo", "Afrodisiaco", "Agasajar", "Agencia", "Agiotista", "Agnosticismo", "Agosto", "Agregar", "Ahorrar", "Ajedrez", "Ajiaco", "Ajetreo", "Aji", "Alabarda", "Alacran", "Alarma", "Albumina", "Alcalde", "Alcancia", "Alcantarilla", "Alcatraz", "Alcohol", "Alegoria", "Alferez", "Alfombra", "Algoritmo", "Alguacil","Abetos", "Abriga", "Abuela", "Acceso", "Bromas", "Barniz", "Basado", "Brutal", "Cabeza", "Casita", "Cascos", "Celosa", "Dulces", "Dotado", "Discos", "Dureza", "Entera", "Exacto", "Encima", "Enfado", "Famosa", "Fresas", "Filtro", "Flecha", "Helado", "Herida", "Hierro", "Huevos", "Infiel", "Inflar", "Inerte", "Imagen", "Jardin", "Juicio", "Jarron", "Juzgar", "Labios", "Llorar", "Lluvia", "Locura", "Musica", "Morado", "Modelo", "Madera", "Nervio", "Ninfas", "Numero", "Nombre", "Omitir", "Opinar", "Olfato", "Objeto", "Pensar", "Parque", "Pierna", "Pelota", "Riesgo", "Romper", "Rutina", "Ranura", "Sabios", "Simple", "Sirven", "Soplar", "Tienda", "Torres", "Tesoro", "Trueno", "Unidad", "Unirse", "Umbral", "Usando", "Verano", "Vicios", "Viejas", "Visual"];
 
 var lose=false;
 
@@ -13,22 +11,32 @@ var letrasCorrectas=[];
 
 const lineas= document.querySelector('.linealetra');
 const divTeclado= document.querySelector('.teclado');
-const imagen= document.querySelector('.imagenahorcado');
-const puntosLocales= document.querySelector('.puntos');
+const imagen= document.querySelector('.imagen');
+const puntosPantalla= document.querySelector('.puntos');
+const nombrePantalla= document.querySelector('.nombrePrincipal');
+const turnosPantalla= document.querySelector('.turno');
+const vidasPantalla= document.querySelector('.vidas');
 
 function resetGame(){
     vidas=6;
     turnos=0;
     puntos=0;
+      //FALTA EL JUGADOR 
+    ///nombrePrincipal=jugador.nombre; 
     letrasCorrectas=[];
+    //imagen.scr="imagenes\\0vidas.png";
+    vidasPantalla.innerText=`${vidas}`;
+    turnosPantalla.innerText=`${turnos}`;
+    puntosPantalla.innerText=`${puntos}`;
+    nombrePantalla.innerText=`${nombrePrincipal}`;
     //lineas de la palabras
-    palabraPrincipal=seleccionarPalabra();
+    palabraPrincipal=seleccionarPalabra().toLowerCase();
     letrasPrincipales=palabraPrincipal.split('');
     lineas.innerHTML=palabraPrincipal.split('').map(() => `<li class="letra"></li>`).join('');
-    imagen.scr='imagenes\\6vidas.png';
     divTeclado.querySelectorAll("button").forEach(btn => btn.disabled=false);
     
 }
+
 crearTeclado();
 
 
@@ -39,10 +47,11 @@ function jugar(boton,letraSeleccionada){
     if (palabraPrincipal.includes(letraSeleccionada)){
 
     [...palabraPrincipal].forEach((letra, indice) => {
-        console.log(indice)
         if(letra===letraSeleccionada){
             letrasCorrectas.push(letra);
-            lineas.querySelectorAll("li")[indice].innerHTML=letra;
+            lineas.querySelectorAll("li")[indice].innerText=letra;
+            console.log(letra);
+            console.log(indice);
             lineas.querySelectorAll("li")[indice].classList.add("letrasCorrectas");
             puntos+=calculoPuntos(cantidadLetra(letra));
         }
@@ -50,7 +59,7 @@ function jugar(boton,letraSeleccionada){
     } else {
         vidas--;
         console.log(vidas);
-        switch (vidas){
+        /*switch (vidas){
         case 1:{
 
                 imagen.scr='imagenes\\1vidas.png';
@@ -77,9 +86,21 @@ function jugar(boton,letraSeleccionada){
             imagen.scr='imagenes\\0vidas.png';
             break;
         }
-        }
+        }*/
     }
+    
+    
+
     boton.disabled=true;
+
+    vidasPantalla.innerText=`${vidas}`;
+
+    turnosPantalla.innerText=`${turnos}`;
+
+    puntosPantalla.innerText=`${puntos}`;
+
+    nombrePantalla.innerText=`${nombrePrincipal}`;
+    
     if (lose==true){
         swal({
 
@@ -110,16 +131,9 @@ function jugar(boton,letraSeleccionada){
 
                 //modficar el objeto
                 //guardar la nueva lista en local storage
-              });}
-     /*
-    cambiar la muestra en pantalla
-    vidas
-    puntos
-    nombre
-    turnos
-    */
-    } 
-   
+});}
+} 
+
 
 
 
@@ -133,12 +147,14 @@ function cantidadLetra(letra){
 function seleccionarPalabra(){
     var palabra=listaPalabras[Math.floor(Math.random()*listaPalabras.length)];
     return palabra;
+
+    //aqui va reser
 }
 function crearTeclado(){
-for (let index=97; index<=122; index++) {
-    const button = document.createElement("button");
-    button.innerText = String.fromCharCode(index);
-    divTeclado.appendChild(button);
-    button.addEventListener("click", (e) => jugar(e.target, String.fromCharCode(index)));
-resetGame();
-}}
+    for (let index=97; index<=122; index++) {
+        const boton = document.createElement("button");
+        boton.innerText = String.fromCharCode(index);
+        divTeclado.appendChild(boton);
+        boton.addEventListener("click", (e) => jugar(e.target, String.fromCharCode(index)));
+        resetGame()
+    }}
