@@ -12,8 +12,11 @@ en el otro archivo tengo que guardar el jugador en el local storage y actualizar
 
 // Prepara la pagina
 document.addEventListener("DOMContentLoaded", function () {
+  if (localStorage.getItem("HistorialJugadores"==null)){
+  localStorage.setItem("HistorialJugadores", JSON.stringify(listaJugadores))}
+  else{
     tablaLocalStorage();
-
+  }
 });
 
 //Funcion que llena la tabla con los datos del local storage
