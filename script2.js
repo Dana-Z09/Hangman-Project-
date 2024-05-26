@@ -118,7 +118,6 @@ function jugar(boton,letraSeleccionada){
             })
             .then((isOkay) => {
               if(isOkay){
-                resetGame();
                 location.href="index1.html";}
 });}
     if (letrasCorrectas.length === palabraPrincipal.length) {
@@ -146,9 +145,6 @@ function jugar(boton,letraSeleccionada){
 });}
 } 
 
-
-
-
 function calculoPuntos(cantidadLetra){
     return vidas*cantidadLetra;
 }
@@ -174,15 +170,15 @@ function crearTeclado(){
 function actualizarDatosGanador(listaJugadores,nombreJugador,puntaje){
     for(var i=0;i<listaJugadores.length;i++){
         if(listaJugadores[i].nombre==nombreJugador){
+            
             console.log(listaJugadores[i].nombre)
-            listaJugadores[i].puntos=puntaje;
+            listaJugadores[i].puntos+=puntaje;
             console.log(listaJugadores[i].puntos)
             listaJugadores[i].victorias++;
             console.log(listaJugadores[i].victorias)
         }
       }
 }
-
 function strTitulo(str) {
     str=str.toLowerCase();
     const capitalized =  str.charAt(0).toUpperCase()+ str.slice(1);
