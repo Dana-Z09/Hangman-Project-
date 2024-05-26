@@ -67,28 +67,28 @@ function jugar(boton,letraSeleccionada){
 
         case 1:{
 
-                imagen.scr='imagenes\\1vidas.png';
+                imagen.src='imagenes/1vidas.png';
                 break;
         }
         case 2:{
-                imagen.scr='imagenes\\2vidas.png';
+                imagen.src='imagenes/2vidas.png';
                 break;
         }
         case 3:{
-                imagen.scr='imagenes\\3vidas.png';
+                imagen.src='imagenes/3vidas.png';
                 break;
         }
         case 4:{
-                imagen.scr='imagenes\\4vidas.png';
+                imagen.src='imagenes/4vidas.png';
                 break;
         }
         case 5:{
-                imagen.scr='imagenes\\5vidas.png';
+                imagen.src='imagenes/5vidas.png';
                 break;
         }
         case 0:{
             lose=true
-            imagen.scr='imagenes\\0vidas.png';
+            imagen.src='imagenes/0vidas.png';
             break;
         }
         }
