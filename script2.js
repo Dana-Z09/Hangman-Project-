@@ -24,11 +24,14 @@ function resetGame(){
       //FALTA EL JUGADOR 
     ///nombrePrincipal=jugador.nombre; 
     letrasCorrectas=[];
+    //imagenes no se ven
     //imagen.scr="imagenes\\0vidas.png";
+    
     vidasPantalla.innerText=`${vidas}`;
     turnosPantalla.innerText=`${turnos}`;
     puntosPantalla.innerText=`${puntos}`;
     nombrePantalla.innerText=`${nombrePrincipal}`;
+
     //lineas de la palabras
     palabraPrincipal=seleccionarPalabra().toLowerCase();
     letrasPrincipales=palabraPrincipal.split('');
@@ -59,7 +62,9 @@ function jugar(boton,letraSeleccionada){
     } else {
         vidas--;
         console.log(vidas);
-        /*switch (vidas){
+        //imagenes no se ven
+        switch (vidas){
+
         case 1:{
 
                 imagen.scr='imagenes\\1vidas.png';
@@ -86,7 +91,7 @@ function jugar(boton,letraSeleccionada){
             imagen.scr='imagenes\\0vidas.png';
             break;
         }
-        }*/
+        }
     }
     
     

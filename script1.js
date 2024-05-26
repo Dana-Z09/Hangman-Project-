@@ -158,3 +158,5 @@ function Jugador(nombre) {
     return this.nombre;
   };
 }
+
+
