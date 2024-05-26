@@ -1,4 +1,4 @@
-var vidas, turnos, puntos,nombrePrincipal;
+var vidas, turnos, puntos,nombrePrincipal,jugadorPrincipal,listaJugadores;
 var listaPalabras=[   "Abandonar", "Abanico", "Abominar", "Abril", "Abrojo", "Academia", "Accidente", "Aceite", "Acelga", "Acera", "Acero", "Aciago", "Acolito", "Acordeon", "Acosar", "Acrostico", "Acuarela", "Adiccion", "Adivinar", "Adonis", "Adrede", "Aduana", "Adulterio", "Aforismo", "Afrodisiaco", "Agasajar", "Agencia", "Agiotista", "Agnosticismo", "Agosto", "Agregar", "Ahorrar", "Ajedrez", "Ajiaco", "Ajetreo", "Aji", "Alabarda", "Alacran", "Alarma", "Albumina", "Alcalde", "Alcancia", "Alcantarilla", "Alcatraz", "Alcohol", "Alegoria", "Alferez", "Alfombra", "Algoritmo", "Alguacil","Abetos", "Abriga", "Abuela", "Acceso", "Bromas", "Barniz", "Basado", "Brutal", "Cabeza", "Casita", "Cascos", "Celosa", "Dulces", "Dotado", "Discos", "Dureza", "Entera", "Exacto", "Encima", "Enfado", "Famosa", "Fresas", "Filtro", "Flecha", "Helado", "Herida", "Hierro", "Huevos", "Infiel", "Inflar", "Inerte", "Imagen", "Jardin", "Juicio", "Jarron", "Juzgar", "Labios", "Llorar", "Lluvia", "Locura", "Musica", "Morado", "Modelo", "Madera", "Nervio", "Ninfas", "Numero", "Nombre", "Omitir", "Opinar", "Olfato", "Objeto", "Pensar", "Parque", "Pierna", "Pelota", "Riesgo", "Romper", "Rutina", "Ranura", "Sabios", "Simple", "Sirven", "Soplar", "Tienda", "Torres", "Tesoro", "Trueno", "Unidad", "Unirse", "Umbral", "Usando", "Verano", "Vicios", "Viejas", "Visual"];
 
 var lose=false;
@@ -18,15 +18,15 @@ const turnosPantalla= document.querySelector('.turno');
 const vidasPantalla= document.querySelector('.vidas');
 
 function resetGame(){
+    jugadorPrincipal=JSON.parse(localStorage.getItem("Jugador-Principal"));
     vidas=6;
     turnos=0;
     puntos=0;
-      //FALTA EL JUGADOR 
-    ///nombrePrincipal=jugador.nombre; 
+    nombrePrincipal=jugadorPrincipal.nombre; 
     letrasCorrectas=[];
     //imagenes no se ven
     //imagen.scr="imagenes\\0vidas.png";
-    
+
     vidasPantalla.innerText=`${vidas}`;
     turnosPantalla.innerText=`${turnos}`;
     puntosPantalla.innerText=`${puntos}`;
@@ -40,9 +40,12 @@ function resetGame(){
     
 }
 
-crearTeclado();
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    crearTeclado();
+
+});
 
 function jugar(boton,letraSeleccionada){
     console.log(palabraPrincipal); 
@@ -53,15 +56,12 @@ function jugar(boton,letraSeleccionada){
         if(letra===letraSeleccionada){
             letrasCorrectas.push(letra);
             lineas.querySelectorAll("li")[indice].innerText=letra;
-            console.log(letra);
-            console.log(indice);
             lineas.querySelectorAll("li")[indice].classList.add("letrasCorrectas");
             puntos+=calculoPuntos(cantidadLetra(letra));
         }
     });
     } else {
         vidas--;
-        console.log(vidas);
         //imagenes no se ven
         switch (vidas){
 
@@ -107,6 +107,7 @@ function jugar(boton,letraSeleccionada){
     nombrePantalla.innerText=`${nombrePrincipal}`;
     
     if (lose==true){
+        localStorage.setItem("Jugador-Principal", null);
         swal({
 
             title:'Perdiste 😣',
@@ -121,6 +122,14 @@ function jugar(boton,letraSeleccionada){
                 location.href="index1.html";}
 });}
     if (letrasCorrectas.length === palabraPrincipal.length) {
+        //buscar jugador desde almacenamiento y cambiarle los datos
+        listaJugadores=JSON.parse(localStorage.getItem("HistorialJugadores"));
+        nombrePrincipal=strTitulo(nombrePrincipal);
+        console.log("nombrePrincipal");
+        actualizarDatosGanador(listaJugadores,nombrePrincipal,puntos);
+        localStorage.setItem("HistorialJugadores", JSON.stringify(listaJugadores));
+        //reiniciar jugador
+        localStorage.setItem("Jugador-Principal", null);
         swal({
 
             title:'¡Ganaste! 😁',
@@ -131,11 +140,9 @@ function jugar(boton,letraSeleccionada){
             })
             .then((isOkay) => {
               if(isOkay){
-                resetGame();
                 location.href="index1.html";}
 
-                //modficar el objeto
-                //guardar la nueva lista en local storage
+                
 });}
 } 
 
@@ -163,3 +170,21 @@ function crearTeclado(){
         boton.addEventListener("click", (e) => jugar(e.target, String.fromCharCode(index)));
         resetGame()
     }}
+
+function actualizarDatosGanador(listaJugadores,nombreJugador,puntaje){
+    for(var i=0;i<listaJugadores.length;i++){
+        if(listaJugadores[i].nombre==nombreJugador){
+            console.log(listaJugadores[i].nombre)
+            listaJugadores[i].puntos=puntaje;
+            console.log(listaJugadores[i].puntos)
+            listaJugadores[i].victorias++;
+            console.log(listaJugadores[i].victorias)
+        }
+      }
+}
+
+function strTitulo(str) {
+    str=str.toLowerCase();
+    const capitalized =  str.charAt(0).toUpperCase()+ str.slice(1);
+    return capitalized;
+}

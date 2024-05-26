@@ -13,6 +13,7 @@ en el otro archivo tengo que guardar el jugador en el local storage y actualizar
 // Prepara la pagina
 document.addEventListener("DOMContentLoaded", function () {
     tablaLocalStorage();
+
 });
 
 //Funcion que llena la tabla con los datos del local storage
@@ -39,24 +40,16 @@ function tablaLocalStorage(){
 function comenzarJuego(){
   //Validacion de nombre
   if(validarNombreJugador()){
-        nombreJugador=strTitulo(nombreJugadorHTML.value);
-        jugadorPrincipal=busquedaPorNombre(listaJugadores,nombreJugador);
-        if (jugadorPrincipal==null){
-          jugadorPrincipal = new Jugador(nombreJugador);
-          listaJugadores.push(jugadorPrincipal);
-          localStorage.setItem("HistorialJugadores", JSON.stringify(listaJugadores));
-        }
-/*
-        console.log(jugadorPrincipal.getNombre());
-        console.log(jugadorPrincipal.getPuntos());
-        console.log(jugadorPrincipal.getVictorias());
-        console.log(listaJugadores);
-      }*/
+    nombreJugador=strTitulo(nombreJugadorHTML.value);
+    jugadorPrincipal=busquedaPorNombre(listaJugadores,nombreJugador);
+    if (jugadorPrincipal==null){
+      jugadorPrincipal = new Jugador(nombreJugador);
+      listaJugadores.push(jugadorPrincipal);
+      localStorage.setItem("HistorialJugadores", JSON.stringify(listaJugadores));
+    }
+    localStorage.setItem("Jugador-Principal", JSON.stringify(jugadorPrincipal));
   }
       alertaVerificacion()
-
-
-      /*Mandar jugador y palabra a la otra pagina*/ 
 }
 
 //Funcion que busca a un jugador en la lista por su nombre, si esta te retorna el objeto, si no esta retorna null
