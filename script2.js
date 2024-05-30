@@ -118,7 +118,7 @@ function jugar(boton,letraSeleccionada){
             })
             .then((isOkay) => {
               if(isOkay){
-                location.href="index1.html";}
+                location.href="index.html";}
 });}
     if (letrasCorrectas.length === palabraPrincipal.length) {
         //buscar jugador desde almacenamiento y cambiarle los datos
@@ -139,7 +139,7 @@ function jugar(boton,letraSeleccionada){
             })
             .then((isOkay) => {
               if(isOkay){
-                location.href="index1.html";}
+                location.href="index.html";}
 
                 
 });}
